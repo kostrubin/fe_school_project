@@ -1,10 +1,10 @@
 <template lang="pug">
-    auth
+    h1 Routes
 </template>
 
 <script>
 export default {
-  name: 'find'
+  name: 'Routes'
 }
 </script>
 
