@@ -16,8 +16,8 @@
 
 <script>
 export default {
-    name: 'PageHeader'
-  }
+  name: 'PageHeader'
+}
 </script>
 
 <style lang="scss">
