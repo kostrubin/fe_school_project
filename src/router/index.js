@@ -4,7 +4,7 @@ import Vuetify from 'vuetify'
 import VeeValidate from 'vee-validate'
 import Login from '@/views/Login'
 import Map from '@/views/Map'
-import Stations from '@/views/Stations'
+import Stops from '@/views/Stops'
 import Routes from '@/views/Routes'
 import NotFound from '@/views/NotFound'
 import 'vuetify/dist/vuetify.min.css'
@@ -26,9 +26,9 @@ export default new Router({
       component: Map
     },
     {
-      path: '/stations',
-      name: 'Stations',
-      component: Stations
+      path: '/stops',
+      name: 'Stops',
+      component: Stops
     },
     {
       path: '/routes',

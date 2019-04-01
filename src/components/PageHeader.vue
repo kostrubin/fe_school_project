@@ -5,7 +5,7 @@
         v-btn(flat)
           router-link(to="/map") Map
         v-btn(flat)
-          router-link(to="/stations") Stations
+          router-link(to="/stops") Stops
         v-btn(flat)
           router-link(to="/routes") Routes
       v-spacer

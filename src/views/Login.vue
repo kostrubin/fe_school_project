@@ -2,7 +2,7 @@
   div
     //- v-app#inspire
     v-form
-      //- h1 {{ msg }}
+      h1 {{ msg }}
       //- input(type="email" placeholder="Email" required)
       //- input(type="password" placeholder="Password" required)
       //- input(type="checkbox" id="remember" checked)
@@ -18,8 +18,16 @@
         data-vv-name="name"
         required
       )
+      v-text-field.input-group--focused(
+        :append-icon="show2 ? 'visibility' : 'visibility_off'"
+        :type="show2 ? 'text' : 'password'"
+        name="input-10-2"
+        label="Password"
+        @click:append="show2 = !show2"
+        required
+      )
 
-      v-btn(color='info' @click="submit") Login
+      v-btn.login(@click="submit") Login
 
     //- v-container(class='fluid')
     //-   v-layout(class='row wrap')
@@ -166,5 +174,10 @@ input[type="submit"]:hover {
   cursor: pointer;
   box-shadow: 0 2px 5px 0 rgba(0,0,0,.2), 0 2px 10px 0 rgba(0,0,0,.2);
   text-shadow: 0 1px rgba(0,0,0,.4);
+}
+.login {
+  margin-top: 40px;
+  background-color: rgb(43, 103, 186) !important;
+  color: white;
 }
 </style>

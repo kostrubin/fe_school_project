@@ -2,7 +2,7 @@
   div
     page-header
     div#content
-      h1 Routes
+      h1 Stops
         v-app#inspire
           v-data-table.elevation-1(:headers="headers" :items="desserts")
             template(v-slot:items="props")
@@ -18,7 +18,7 @@
 import PageHeader from '@/components/PageHeader'
 
 export default {
-  name: 'Routes',
+  name: 'Stops',
   components: {
     PageHeader
   },
