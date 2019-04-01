@@ -1,5 +1,5 @@
-<template>
-  <div id='mymap'></div>
+<template lang="pug">
+  div#mymap
 </template>
 
 <script>
@@ -10,7 +10,7 @@ export default {
   name: 'LMap',
   methods: {
     createMapInstance () {
-      const mymap = LMap.map('mymap').setView([51.505, -0.09], 13)
+      const mymap = LMap.map('mymap').setView([59.939, 30.315], 13)
       LMap.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
         maxZoom: 18,
@@ -33,7 +33,9 @@ export default {
 
 <style lang="scss">
 #mymap {
-  height: 500px;
+  position: absolute;
+  margin-top: 64px;
+  height: calc(100vh - 64px);
   width: 100%;
 }
 </style>

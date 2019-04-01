@@ -1,5 +1,5 @@
 <template lang="pug">
-  div#id=app
+  div#app
     router-view
 </template>
 
@@ -17,6 +17,5 @@ body {
   text-align: center;
   color: #2c3e50;
   background-color: rgba(221, 221, 221, .3);
-  margin-top: 60px;
 }
 </style>

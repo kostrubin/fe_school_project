@@ -1,17 +1,19 @@
 <template lang="pug">
-    div
-        header
-            nav
-                ul
-                    li
-                        a(href='/map') Map
-                    li
-                        a(href='/stations') Stations
-                    li
-                        a(href='/Routes') Routes
-            input(type="search")
-            img
-            v-gravatar(email="somebody@somewhere.com")
+  div#header
+    v-toolbar
+      v-toolbar-items.hidden-sm-and-down
+        v-btn(flat)
+          router-link(to="/map") Map
+        v-btn(flat)
+          router-link(to="/stations") Stations
+        v-btn(flat)
+          router-link(to="/routes") Routes
+      v-spacer
+      v-text-field(hide-details prepend-icon="search" single-line)
+      v-spacer
+      v-spacer
+      v-avatar
+        img(src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John")
 </template>
 
 <script>
@@ -21,23 +23,14 @@ export default {
 </script>
 
 <style lang="scss">
-    header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 40px;
-        padding: 0;
-        margin: 0;
-        background: url(../assets/bars-solid.svg) no-repeat,
-                    rgba(212, 161, 212, .8);
-    }
-    header nav ul {
-        display: flex;
-        list-style: none;
-    }
-    header a {
-        margin: 0 20px;
-        text-decoration: none;
-    }
+#header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999999;
+}
+a {
+  color: rgb(44, 62, 80);
+  text-decoration: none;
+}
 </style>
