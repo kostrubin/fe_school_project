@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Vuetify from 'vuetify'
 import VeeValidate from 'vee-validate'
 import Login from '@/views/Login'
+import Reg from '@/views/Reg'
 import Map from '@/views/Map'
 import Stops from '@/views/Stops'
 import Routes from '@/views/Routes'
@@ -17,8 +18,13 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'login',
+      name: 'Login',
       component: Login
+    },
+    {
+      path: '/reg',
+      name: 'Reg',
+      component: Reg
     },
     {
       path: '/map',

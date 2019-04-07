@@ -3,11 +3,6 @@
     v-app#inspire
       v-form
         h1 {{ msg }}
-        //- input(type="email" placeholder="Email" required)
-        //- input(type="password" placeholder="Password" required)
-        //- input(type="checkbox" id="remember" checked)
-        //- label(for="remember") Remember me
-        //- input(type="submit" value="Login")
 
         // for login
         v-text-field(
@@ -27,31 +22,23 @@
           required
         )
 
-        v-checkbox(
-          v-model="checkbox"
-          value="1"
-          label="Remember me"
-          data-vv-name="checkbox"
-          type="checkbox"
-        )
+        v-btn.login(@click="submit") Registration
+        router-link#login(to="/") go to login
 
-        v-btn.login(@click="submit") Login
-        router-link#reg(to="/reg") create an account
-
-    //- v-container(class='fluid')
-    //-   v-layout(class='row wrap')
-    //-     v-flex(class='xs12 sm6')
-    //-       v-text-field(
-    //-         v-model="password"
-    //-         :append-icon="show1 ? 'visibility' : 'visibility_off'"
-    //-         :rules="[rules.required, rules.min]"
-    //-         :type="show1 ? 'text' : 'password'"
-    //-         name="input-10-1"
-    //-         label="Normal with hint text"
-    //-         hint="At least 8 characters"
-    //-         counter
-    //-         @click:append="show1 = !show1"
-    //-       )
+      // v-container.fluid
+      //   v-layout.row.wrap
+      //     v-flex.xs12.sm6
+      //       v-text-field(
+      //         v-model="password"
+      //         :append-icon="show1 ? 'visibility' : 'visibility_off'"
+      //         :rules="[rules.required, rules.min]"
+      //         :type="show1 ? 'text' : 'password'"
+      //         name="input-10-1"
+      //         label="Normal with hint text"
+      //         hint="At least 8 characters"
+      //         counter
+      //         @click:append="show1 = !show1"
+      //       )
 
         //- v-flex(xs12 sm6)
         //-   v-text-field(
@@ -131,10 +118,10 @@
 
 <script>
 export default {
-  name: 'Login',
+  name: 'Reg',
   data () {
     return {
-      msg: 'Login'
+      msg: 'Registration'
     }
   }
 }
@@ -192,11 +179,11 @@ input[type="submit"]:hover {
 .v-input--checkbox {
   justify-content: center;
 }
-#reg {
+#login {
   display: block;
   font-size: .9em;
 }
-#reg:hover {
+#login:hover {
   opacity: .8;
 }
 </style>
