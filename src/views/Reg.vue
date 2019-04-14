@@ -2,28 +2,28 @@
   div
     v-app#inspire
       v-form
-        h1 {{ msg }}
+          h1 {{ msg }}
 
-        // for login
-        v-text-field(
-          v-model="Login"
-          v-validate="'required'"
-          :error-messages="errors.collect('name')"
-          label="Login"
-          data-vv-name="name"
-          required
-        )
-        v-text-field.input-group--focused(
-          :append-icon="show2 ? 'visibility' : 'visibility_off'"
-          :type="show2 ? 'text' : 'password'"
-          name="input-10-2"
-          label="Password"
-          @click:append="show2 = !show2"
-          required
-        )
+          // for login
+          .form-item(:class="{ errorInput: $v.login.$error }")
+            v-text-field(
+              v-model='login'
+              label="Login"
+              data-vv-name="name"
+              required
+              :class="{ error: $v.login.$error }"
+              @change="$v.login.$touch()"
+          )
+          v-text-field.input-group--focused(
+            v-model='password'
+            type="password"
+            name="input-10-2"
+            label="Password"
+            required
+          )
 
-        v-btn.login(@click="submit") Registration
-        router-link#login(to="/") go to login
+          v-btn.reg(@click="") Registration
+          router-link#reg(to="/") go to login
 
       // v-container.fluid
       //   v-layout.row.wrap
@@ -117,13 +117,44 @@
 </template>
 
 <script>
+import { required, minLength } from 'vuelidate/lib/validators'
 export default {
   name: 'Reg',
   data () {
     return {
+      login: '',
+      password: '',
+      repeatPassword: '',
       msg: 'Registration'
     }
+  },
+  validations: {
+    login: {
+      required,
+      minLength: minLength(4)
+    }
+
   }
+  // methods: {
+  //   onSubmit () {
+  //     this.$v.$touch()
+  //     if (this.$v.$invalid) {
+  //       this.submitStatus = 'ERROR'
+  //     } else {
+  //       console.log('submit')
+  //       const user = {
+  //         email: this.email,
+  //         password: this.password
+  //       }
+  //       this.$store.dispatch('registerUser', user)
+  // console.log(user)
+  // this.submitStatus = 'PENDING'
+  // setTimeout(() => {
+  //   this.submitStatus = 'OK'
+  // }, 500)
+  //     }
+  //   }
+  // }
 }
 </script>
 
@@ -171,7 +202,7 @@ input[type="submit"]:hover {
   box-shadow: 0 2px 5px 0 rgba(0,0,0,.2), 0 2px 10px 0 rgba(0,0,0,.2);
   text-shadow: 0 1px rgba(0,0,0,.4);
 }
-.login {
+.reg {
   margin-bottom: 10px;
   background-color: rgb(43, 103, 186) !important;
   color: white;
@@ -179,11 +210,15 @@ input[type="submit"]:hover {
 .v-input--checkbox {
   justify-content: center;
 }
-#login {
+#reg {
   display: block;
   font-size: .9em;
 }
-#login:hover {
+#reg:hover {
   opacity: .8;
+}
+.error {
+  background-color: white !important;
+  border-color: #fc5c65;
 }
 </style>

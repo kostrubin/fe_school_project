@@ -13,7 +13,6 @@
         v-text-field(
           v-model="Login"
           v-validate="'required'"
-          :error-messages="errors.collect('name')"
           label="Login"
           data-vv-name="name"
           required
