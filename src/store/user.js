@@ -7,7 +7,7 @@ export default {
   mutations: {},
   actions: {
     async registerUser ({commit}, {email, password}) {
-      const user = await firebase.auth().createUserAndRetrieveDataWithEmailAndPassword(email, password)
+      const user = await firebase.auth().createUserWithEmailAndPassword(email, password)
       console.log(user)
     }
   },
