@@ -10,8 +10,10 @@ import 'firebase/auth'
 import 'firebase/database'
 import 'firebase/storage'
 
-Vue.use(Vuetify)
-Vue.use(Vuelidate)
+Vue.use(
+  Vuetify,
+  Vuelidate
+)
 
 Vue.config.productionTip = false
 

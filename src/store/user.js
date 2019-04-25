@@ -1,15 +1,34 @@
 import firebase from 'firebase/app'
 
+import User from './user_help.js'
+
 export default {
   state: {
     user: null
   },
-  mutations: {},
+  mutations: {
+    setUser (state, payload) {
+      state.user = payload
+    }
+  },
   actions: {
     async registerUser ({commit}, {email, password}) {
-      const user = await firebase.auth().createUserWithEmailAndPassword(email, password)
-      console.log(user)
+      commit('clearError')
+      commit('setLoading', true)
+      try {
+        const user = await firebase.auth().createUserWithEmailAndPassword(email, password)
+        commit('setUser', new User(user.user.uid))
+        commit('setLoading', false)
+      } catch (error) {
+        commit('setLoading', false)
+        commit('setError', error.message)
+        throw error
+      }
     }
+    // async loginUser ({commit}, {email, password}) {
+    //   const user = await firebase.auth().createUserWithEmailAndPassword(email, password)
+    //   console.log(user)
+    // }
   },
   getters: {
     user (state) {

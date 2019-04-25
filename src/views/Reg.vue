@@ -2,32 +2,41 @@
   div
     v-app#inspire
       v-form
-          //(@submit.prevent="onSubmit")
           h1 Registration
-
           v-text-field(
             :rules="[rules.required, rules.email]"
             v-model='email'
             label="Email"
+            required
           )
           v-text-field(
             :rules="[rules.required, rules.min]",
-            :append-icon="show1 ? 'visibility' : 'visibility_off'"
-            :type="show1 ? 'text' : 'password'"
+            :append-icon="show ? 'visibility' : 'visibility_off'"
+            :type="show ? 'text' : 'password'"
             v-model='password'
             label="Password"
-            @click:append="show1 = !show1"
+            @click:append="show = !show"
+            required
           )
-
           v-text-field(
             :rules="[rules.required, rules.thesame]",
-            :type="show1 ? 'text' : 'password'"
+            :type="show ? 'text' : 'password'"
             v-model='repeat'
             label="Repeat password"
+            required
           )
-
-          v-btn.reg(@click="onSubmit()") Registration
+          v-btn(
+            color="primary"
+            @click="onSubmit()"
+          )
+            span(v-if="loading") Loading...
+            span(v-else) Registration
           router-link#reg(to="/") go to login
+
+          .buttons-list.buttons-list--info
+            p.typo__p(v-if="status === 'OK'") Thanks for your submission!
+            p.typo__p(v-if="status === 'ERROR'") Please fill the form correctly.
+            p.typo__p(v-else) {{ status }}
 </template>
 
 <script>
@@ -40,8 +49,9 @@ export default {
       email: '',
       password: '',
       repeat: '',
-      show1: false,
-      show2: true,
+      status: '',
+      valid: false,
+      show: false,
       rules: {
         required: value => !!value || 'Required',
         email: value => {
@@ -56,6 +66,9 @@ export default {
   validations: {
     email: {
       required
+    },
+    password: {
+      required
     }
   },
   methods: {
@@ -63,20 +76,30 @@ export default {
       console.log(this.$v)
       this.$v.$touch()
       if (this.$v.$invalid) {
-        this.submitStatus = 'ERROR'
+        this.status = 'ERROR'
       } else {
-        console.log('submit')
         const user = {
           email: this.email,
           password: this.password
         }
         this.$store.dispatch('registerUser', user)
-        console.log(user)
-        this.submitStatus = 'PENDING'
-        // setTimeout(() => {
-        //   this.submitStatus = 'OK'
-        // }, 500)
+          .then(() => {
+            // this.submitStatus = 'OK'
+            this.$router.push('/')
+          })
+          .catch(err => {
+            this.submitStatus = err.message
+          })
+        this.status = 'PENDING'
+        setTimeout(() => {
+          this.status = 'OK'
+        }, 500)
       }
+    }
+  },
+  computed: {
+    loading () {
+      return this.$store.getters.loading
     }
   }
 }
@@ -95,11 +118,6 @@ form {
 }
 h1 {
   font-size: 1.4em;
-}
-.reg {
-  margin-bottom: 10px;
-  background-color: rgb(43, 103, 186) !important;
-  color: white;
 }
 #reg {
   display: block;
