@@ -15,7 +15,6 @@
           @click:append="show = !show"
         )
         v-checkbox(
-          v-model="remember"
           value="1"
           label="Remember me"
           type="checkbox"
@@ -23,8 +22,15 @@
         v-btn(
           color="primary",
           @click="onSubmit()"
-        ) Login
+        )
+          span(v-if="loading") Loading...
+          span(v-else) Login
+
         router-link#reg(to="/reg") create an account
+
+        p(v-if="status === 'OK'") Logged in!
+        p(v-if="status === 'ERROR'") Please fill the form correctly.
+        p(v-if="status != 'OK' && status != 'ERROR'") {{ status }}
 </template>
 
 <script>
@@ -35,7 +41,9 @@ export default {
     return {
       email: '',
       password: '',
-      remember: '',
+      repeat: '',
+      status: '',
+      valid: false,
       show: false
     }
   },
@@ -49,30 +57,29 @@ export default {
     }
   },
   methods: {
-    // Login button
     onSubmit () {
-      // Initialize Vuelodate
       this.$v.$touch()
-      // Invalid
       if (this.$v.$invalid) {
         this.status = 'ERROR'
-      // Valid
       } else {
-        // User
         const user = {
           email: this.email,
           password: this.password
         }
         this.$store.dispatch('loginUser', user)
           .then(() => {
-            this.$store.dispatch('loginUser', user)
-            // this.submitStatus = 'OK'
-            this.$router.push('/')
+            this.status = 'OK'
+            this.$router.push('/map')
           })
           .catch(err => {
             this.status = err.message
           })
       }
+    }
+  },
+  computed: {
+    loading () {
+      return this.$store.getters.loading
     }
   }
 }
@@ -81,7 +88,7 @@ export default {
 <style lang="scss" scoped>
 form {
   width: 300px;
-  height: 360px;
+  height: 400px;
   padding: 30px 15px;
   margin: 10% auto;
   border: 1px solid rgba(131, 131, 131, .7);
@@ -97,6 +104,7 @@ h1 {
 }
 #reg {
   display: block;
+  margin-bottom: 10px;
   font-size: .9em;
 }
 </style>
