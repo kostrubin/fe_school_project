@@ -11,7 +11,7 @@
               td.text-xs-right {{ props.item.fat }}
               td.text-xs-right {{ props.item.carbs }}
             template(v-slot:pageText="props")
-              Lignes {{ props.pageStart }} - {{ props.pageStop }} de {{ props.itemsLength }}
+              | Lignes {{ props.pageStart }} - {{ props.pageStop }} de {{ props.itemsLength }}
 </template>
 
 <script>

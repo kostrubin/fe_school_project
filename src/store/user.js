@@ -38,6 +38,10 @@ export default {
         commit('setError', error.message)
         throw error
       }
+    },
+    loggedUser ({commit}, payload) {
+      commit('setUser', new User(payload.uid))
+      console.log(payload.uid)
     }
   },
   getters: {

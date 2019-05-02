@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from '../store'
+
 import Login from '@/views/Login'
 import Reg from '@/views/Reg'
 import Map from '@/views/Map'
@@ -24,17 +26,26 @@ export default new Router({
     {
       path: '/map',
       name: 'Map',
-      component: Map
+      component: Map,
+      beforeEnter (to, from, next) {
+        store.getters.checkUser ? next() : next('/')
+      }
     },
     {
       path: '/stops',
       name: 'Stops',
-      component: Stops
+      component: Stops,
+      beforeEnter (to, from, next) {
+        store.getters.checkUser ? next() : next('/')
+      }
     },
     {
       path: '/routes',
       name: 'Routes',
-      component: Routes
+      component: Routes,
+      beforeEnter (to, from, next) {
+        store.getters.checkUser ? next() : next('/')
+      }
     },
     {
       path: '/404',
