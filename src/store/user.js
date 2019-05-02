@@ -24,11 +24,11 @@ export default {
         commit('setError', error.message)
         throw error
       }
+    },
+    async loginUser ({commit}, {email, password}) {
+      const user = await firebase.auth().createUserWithEmailAndPassword(email, password)
+      console.log(user)
     }
-    // async loginUser ({commit}, {email, password}) {
-    //   const user = await firebase.auth().createUserWithEmailAndPassword(email, password)
-    //   console.log(user)
-    // }
   },
   getters: {
     user (state) {

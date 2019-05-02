@@ -31,12 +31,12 @@
           )
             span(v-if="loading") Loading...
             span(v-else) Registration
+
           router-link#reg(to="/") go to login
 
-          .buttons-list.buttons-list--info
-            p.typo__p(v-if="status === 'OK'") Thanks for your submission!
-            p.typo__p(v-if="status === 'ERROR'") Please fill the form correctly.
-            p.typo__p(v-else) {{ status }}
+          p(v-if="status === 'OK'") Thanks for your submission!
+          p(v-if="status === 'ERROR'") Please fill the form correctly.
+          p(v-if="status != 'OK' && status != 'ERROR'") {{ status }}
 </template>
 
 <script>
@@ -84,16 +84,11 @@ export default {
         }
         this.$store.dispatch('registerUser', user)
           .then(() => {
-            // this.submitStatus = 'OK'
-            this.$router.push('/')
+            this.status = 'OK'
           })
           .catch(err => {
-            this.submitStatus = err.message
+            this.status = err.message
           })
-        this.status = 'PENDING'
-        setTimeout(() => {
-          this.status = 'OK'
-        }, 500)
       }
     }
   },
@@ -108,7 +103,7 @@ export default {
 <style lang="scss" scoped>
 form {
   width: 300px;
-  height: 360px;
+  height: 400px;
   padding: 30px 15px;
   margin: 10% auto;
   border: 1px solid rgba(131, 131, 131, .7);
@@ -121,6 +116,7 @@ h1 {
 }
 #reg {
   display: block;
+  margin-bottom: 15px;
   font-size: .9em;
 }
 </style>
