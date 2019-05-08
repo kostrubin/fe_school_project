@@ -4,12 +4,11 @@
     div#content
       h1 Routes
         v-app#inspire
-          v-data-table.elevation-1(:headers="headers" :items="desserts")
+          v-data-table.elevation-1(:headers="headers" :items="routes")
             template(v-slot:items="props")
               td {{ props.item.name }}
-              td.text-xs-right {{ props.item.calories }}
-              td.text-xs-right {{ props.item.fat }}
-              td.text-xs-right {{ props.item.carbs }}
+              td.text-xs-right {{ props.item.stops.title }}
+              td.text-xs-right {{ props.item.stops.time }}
             template(v-slot:pageText="props")
               | Lignes {{ props.pageStart }} - {{ props.pageStop }} de {{ props.itemsLength }}
 </template>
@@ -25,71 +24,37 @@ export default {
   data () {
     return {
       headers: [
-        { text: '№', align: 'center', sortable: false, value: 'name' },
-        { text: 'Routes', align: 'center', value: 'calories' },
-        { text: 'Time', align: 'center', value: 'fat' },
-        { text: 'Favorite', align: 'center', value: 'carbs' }
+        { text: '№', align: 'center', value: 'name' },
+        { text: 'Stops', align: 'center', value: 'stops' },
+        { text: 'Time', align: 'center', value: 'stops' }
       ],
-      desserts: [
+      routes: [
         {
-          name: 'Frozen Yogurt',
-          calories: 159,
-          fat: 6.0,
-          carbs: 24
+          name: '37',
+          stops: [
+            {
+              title: 'Avtovo',
+              time: '6:00'
+            },
+            {
+              title: 'Bronka',
+              time: '6:00'
+            },
+            {
+              title: 'Strelna',
+              time: '6:00'
+            }
+          ]
         },
         {
-          name: 'Ice cream sandwich',
-          calories: 237,
-          fat: 9.0,
-          carbs: 37
+          name: '71',
+          stops: 159,
+          time: 6.0
         },
         {
-          name: 'Eclair',
-          calories: 262,
-          fat: 16.0,
-          carbs: 23
-        },
-        {
-          name: 'Cupcake',
-          calories: 305,
-          fat: 3.7,
-          carbs: 67
-        },
-        {
-          name: 'Gingerbread',
-          calories: 356,
-          fat: 16.0,
-          carbs: 49
-        },
-        {
-          name: 'Jelly bean',
-          calories: 375,
-          fat: 0.0,
-          carbs: 94
-        },
-        {
-          name: 'Lollipop',
-          calories: 392,
-          fat: 0.2,
-          carbs: 98
-        },
-        {
-          name: 'Honeycomb',
-          calories: 408,
-          fat: 3.2,
-          carbs: 87
-        },
-        {
-          name: 'Donut',
-          calories: 452,
-          fat: 25.0,
-          carbs: 51
-        },
-        {
-          name: 'KitKat',
-          calories: 518,
-          fat: 26.0,
-          carbs: 65
+          name: '94',
+          stops: 159,
+          time: 6.0
         }
       ]
     }
