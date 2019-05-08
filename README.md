@@ -1,21 +1,26 @@
 # Frontend school project
 
-> A Vue.js project
+## How to run:
+1) clone the repo
+2) install dependencies
+3) npm run dev
+4) go to localhost:8080 in browser
 
-## Build Setup
+## What was used
+* firebase for backend
+* pug instead of html
+* scss as preprocessor
+* vuetify library
+* vuelidate library
+* vuex
+* router
+* leaflet
 
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## What was implemented
+* registration
+* login
+* markers for the map
+* general component PageHeader
+* CRUD functionality for stops
+* sorting for stops table
+* pagination for stops table
